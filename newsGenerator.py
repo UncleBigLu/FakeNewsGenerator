@@ -10,7 +10,7 @@ import latex
 
 def main(argv):
     # Get and parse command line argvs
-    argvDict = readArgv.readArgv(argv)
+    argvDict = readArgv.read_argv(argv)
 
     # Open json data file
     with open(os.path.join('./Data', argvDict['type'], 'data.json')) as f:

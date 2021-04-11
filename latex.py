@@ -1,7 +1,14 @@
 import subprocess
 import os
 
-head = '\documentclass{ctexart}\n\n\\usepackage{tabularx}\n\n\\begin{document}\n\\begin{tabularx}{\\textwidth}{|l|X|} \n\\hline\n'
+head = '''
+    \documentclass{ctexart}
+    
+    \\usepackage{tabularx}
+    \\begin{document}
+    \\begin{tabularx}{\\textwidth}{|l|X|} 
+    \\hline
+'''
 tail = '\\hline\n\\end{tabularx}\n\n\\end{document}\n'
 
 
@@ -10,9 +17,9 @@ def convertPDF(argDict, context):
     textNum = 0
     for p in context:
         textNum += len(p)
-    subprocess.call('touch tmp/target.tex', shell=True)
     # print(context)
     texText = head + '\\textbf{稿件标题}&\\multicolumn{1}{|c|}{\\textbf{' + argDict['topic'] + '}}\\\\\n' \
+              + '\\hline\n' + '\\textbf{编稿者}&\\multicolumn{1}{|c|}{' + 'proto' + '}\\\\\n'  \
               + '\\hline\n' + '\\textbf{正文字数}&\\multicolumn{1}{|c|}{' + str(textNum) + '}\\\\\n' + '\\hline\n' \
               + '\\textbf{新闻发生时间}&\\multicolumn{1}{|c|}{' + argDict[
                   'time'] + '}\\\\\n' + '\\hline\n' + '正文&' #+ context + '\\\\\n' + tail
@@ -20,6 +27,6 @@ def convertPDF(argDict, context):
         texText += p
         texText += '\\newline\n'
     texText += '\\\\\n' + tail
-    with open('tmp/target.tex', 'w') as f:
+    with open('target.tex', 'w') as f:
         f.write(texText)
-    subprocess.call('xelatex tmp/target.tex', shell=True)
+    subprocess.call('xelatex target.tex', shell=True)

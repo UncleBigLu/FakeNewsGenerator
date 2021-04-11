@@ -1,7 +1,9 @@
 import sys, getopt
 
-def readArgv(argv):
+
+def read_argv(argv):
     # Get and parse command line argvs
+
     ret = {'type':'', 'topic': '', 'time': '', 'position': '', 'members': []}
     try:
         opts, args = getopt.getopt(argv, "h", ["type=", "topic=", "time=", "position=", "members="])
@@ -9,7 +11,9 @@ def readArgv(argv):
         print(
             'Usage: newsGenerator.py --topic <topic> --time <time> --position <position> --members <member1[，member2，member3]>')
         sys.exit(2)
-
+    if(len(opts) != 5):
+        print('Usage: newsGenerator.py --topic <topic> --time <time> --position <position> --members <member1[，member2，member3]>')
+        sys.exit(1)
     for opt, arg in opts:
         if opt == '-h':
             print(
