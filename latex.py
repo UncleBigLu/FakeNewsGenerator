@@ -30,3 +30,4 @@ def convertPDF(argDict, context):
     with open('target.tex', 'w') as f:
         f.write(texText)
     subprocess.call('xelatex target.tex', shell=True)
+    subprocess.call('mv target.pdf /home/unclebiglu/nginx_data/fakenews/target.pdf', shell=True)

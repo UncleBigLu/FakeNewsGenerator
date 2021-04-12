@@ -11,9 +11,9 @@ import latex
 def main(argv):
     # Get and parse command line argvs
     argvDict = readArgv.read_argv(argv)
-
+    dirpath = os.path.dirname(os.path.abspath(__file__)) + '/Data'
     # Open json data file
-    with open(os.path.join('./Data', argvDict['type'], 'data.json')) as f:
+    with open(os.path.join(dirpath, argvDict['type'], 'data.json')) as f:
         data = json.load(f)
         # Randomly load one passage
         passage = [data['intro'][random.randint(0, len(data['intro']) - 1)], data['body'][random.randint(0, len(data['body']) - 1)], data['end'][random.randint(0, len(data['end']) - 1)]]
